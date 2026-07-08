@@ -25,7 +25,7 @@ Player::Player(std::string n, int h, int s, int d){
     this->damage = d;
 }
 void Player::attack(){
-    std::cout<<"Attack"<<" "<<this->damage<<std::endl;
+    std::cout<<"Attack"<<" "<<this->damage<<" damage"<<std::endl;
     this->stamina -= 5;
 }
 void Player::take_dmg(int dmg){
