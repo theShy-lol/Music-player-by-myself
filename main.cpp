@@ -58,6 +58,8 @@ int main(){
         if(isAliveEnemy == false){
             std::cout<<"==== Round 2 ===="<<std::endl;
             std::cout<<"New enemy arrived "<<"Thief!"<<std::endl;
+            std::cout<<"=== Enemy turn ==="<<std::endl;
         }
     }
 }
+
