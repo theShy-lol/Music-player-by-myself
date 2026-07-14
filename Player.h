@@ -1,5 +1,5 @@
 #include<iostream>
-#include<string.h>
+#include<string>
 
 
 class Player{
@@ -18,12 +18,8 @@ private:
     int stamina;
     int damage;
 };
-Player::Player(std::string n, int h, int s, int d){
-    this->name = n;
-    this->health = h;
-    this->stamina = s;
-    this->damage = d;
-}
+Player::Player(std::string n, int h, int s, int d)
+: name(n), health(h), stamina(s), damage(d){}
 void Player::attack(){
     std::cout<<"Attack"<<" "<<this->damage<<" damage"<<std::endl;
     this->stamina -= 5;
@@ -34,9 +30,7 @@ void Player::take_dmg(int dmg){
 }
 void Player::parry(int dmg){
     std::cout<<"Damage deflected"<<std::endl;
-    int parried = this->health - dmg * 0.5;
-    std::cout<<parried<<std::endl;
-    this->health - dmg * 0.5;
+    this->health -= dmg * 0.5;
     this->stamina -= 3;
 }
 void Player::heal(){

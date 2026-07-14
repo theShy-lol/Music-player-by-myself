@@ -7,6 +7,7 @@ public:
     Enemy(std::string n, int h, int d);
     int get_dmg();
     int get_health();
+    std::string get_name();
     void attack();
     void take_dmg(int dmg);
 private:
@@ -35,4 +36,7 @@ int Enemy::get_dmg(){
 int Enemy::get_health(){
     return this->health;
 }
+std::string Enemy::get_name(){
+    return this->name;
+} 
 
