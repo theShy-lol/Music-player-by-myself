@@ -2,8 +2,7 @@
 #include<string>
 #include"Player.h"
 #include"Enemy.h"
-
-
+#include<stdlib.h>
 
 
 
@@ -19,7 +18,10 @@ int main(){
     Player p{name, 100, 50, 20};
     Enemy e{"Goblin", 50, 10};
     Enemy t{"Thief", 40, 20};
+    Enemy d{"Dragon", 100,40};
     std::string option;
+    bool isAliveD = false;
+    bool isAliveEnemy_t = false;
     bool isAliveEnemy = true;
     bool isAlivePlayer = true;
 
@@ -31,9 +33,10 @@ int main(){
         std::cout<<"3. Parry"<<std::endl;
         std::cout<<"4. Quit game"<<std::endl;
         std::cin>>option;
+        system("clear");
         std::cout<<"Current Health: "<<p.get_health()<<std::endl;
-        std::cout<<"Enemy Health: "<<e.get_health()<<std::endl;
-        if (option == "1"){
+        if (isAliveEnemy){
+            if (option == "1"){
             p.attack();
             e.take_dmg(p.get_dmg());
         }
@@ -49,16 +52,72 @@ int main(){
         if(e.get_health() <= 0){
             isAliveEnemy = false;
             std::cout<<"Enemy dead!"<<std::endl;
+            isAliveEnemy_t = true;
+            
         }
         else{
             std::cout<<"===Enemy turn==="<<std::endl;
+            std::cout<<"Enemy Health: "<<e.get_health()<<std::endl;
             e.attack();
             p.take_dmg(e.get_dmg());
+            }
         }
-        if(isAliveEnemy == false){
-            std::cout<<"==== Round 2 ===="<<std::endl;
-            std::cout<<"New enemy arrived "<<"Thief!"<<std::endl;
-            std::cout<<"=== Enemy turn ==="<<std::endl;
+        if(isAliveEnemy_t){
+        std::cout<<"New enemy incoming"<<std::endl;
+        std::cout<<"Thief"<<std::endl;
+        std::cout<<"Round 2"<<std::endl;
+        if (option == "1"){
+            p.attack();
+            t.take_dmg(p.get_dmg());
+        }
+        else if(option == "2"){
+            p.heal();
+        }
+        else if(option == "3"){
+            p.parry(t.get_dmg());
+        }
+        else{
+            std::cout<<"Exiting game..."<<std::endl;
+        }
+        if(t.get_health() <= 0){
+            isAliveEnemy_t = false;
+            std::cout<<"Enemy dead!"<<std::endl;
+            isAliveD = true;
+        }
+        else{
+            std::cout<<"===Enemy turn==="<<std::endl;
+            t.attack();
+            p.take_dmg(t.get_dmg());
+            }
+        }
+        if(isAliveD){
+        std::cout<<"New enemy incoming"<<std::endl;
+        std::cout<<"Dragon"<<std::endl;
+        std::cout<<"Final round!"<<std::endl;
+        if (option == "1"){
+            p.attack();
+            d.take_dmg(p.get_dmg());
+        }
+        else if(option == "2"){
+            p.heal();
+        }
+        else if(option == "3"){
+            p.parry(t.get_dmg());
+        }
+        else{
+            std::cout<<"Exiting game..."<<std::endl;
+        }
+        if(d.get_health() <= 0){
+            isAliveD = false;
+            std::cout<<"Enemy dead!"<<std::endl;
+            std::cout<<"Congrats, you won!!"<<std::endl;
+            option = "4";
+        }
+        else{
+            std::cout<<"===Enemy turn==="<<std::endl;
+            d.attack();
+            p.take_dmg(d.get_dmg());
+            }
         }
     }
 }
